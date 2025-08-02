@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Graphical Password Authentication</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
         :root {
             --primary-color: #3a86ff;
             --secondary-color: #8338ec;
@@ -24,12 +26,42 @@
         }
         
         body {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background-image: url('https://images.unsplash.com/photo-1500534623283-312aade485b7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            gap: 20px;
+        }
+
+        .info-container {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            color: var(--light-color);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .info-text h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .info-text ul {
+            list-style-position: inside;
+            margin-bottom: 20px;
+        }
+
+        .info-gif img {
+            width: 100%;
+            border-radius: 8px;
         }
         
         .auth-container {
@@ -297,7 +329,16 @@
     </style>
 </head>
 <body>
-    <div class="auth-container">
+    <div class="info-container">
+            <div class="info-text">
+                <h2>About the System</h2>
+                <p>Step into the future of authentication. This system replaces traditional passwords with a sequence of four images, offering a more intuitive and secure login experience. Your visual password is encrypted and stored locally, ensuring your data remains private and secure.</p>
+            </div>
+            <div class="info-gif">
+                <img src="https://cdn.dribbble.com/users/2193531/screenshots/6129383/secret_information.gif" alt="Cyber Security GIF">
+            </div>
+        </div>
+        <div class="auth-container">
         <div class="auth-header">
             <h1>Graphical Password Authentication</h1>
             <p>Select a sequence of images as your password</p>
@@ -379,7 +420,7 @@
             const registerGrid = document.getElementById('register-grid');
             const loginGrid = document.getElementById('login-grid');
             const registerBtn = document.getElementById('register-btn');
-            const loginBtn = document.getElementById('login-submit-btn'); // Changed ID
+            const loginBtn = document.getElementById('login-submit-btn'); 
             const resetBtn = document.getElementById('reset-btn');
             const loginMessage = document.getElementById('login-message');
             const registerSequenceDots = registerContent.querySelectorAll('.sequence-dot');
@@ -396,15 +437,15 @@
             
             // Sample images (in a real app, you would use a larger set of images)
             const sampleImages = [
-                { id: 1, url: 'https://placehold.co/300x300?text=Tree', alt: 'A large oak tree in a green field' },
-                { id: 2, url: 'https://placehold.co/300x300?text=Cat', alt: 'Orange tabby cat sitting on a windowsill' },
-                { id: 3, url: 'https://placehold.co/300x300?text=Mountain', alt: 'Snow-capped mountain peak under blue sky' },
-                { id: 4, url: 'https://placehold.co/300x300?text=Book', alt: 'Stack of colorful books on a wooden table' },
-                { id: 5, url: 'https://placehold.co/300x300?text=Bicycle', alt: 'Red vintage bicycle leaning against a brick wall' },
-                { id: 6, url: 'https://placehold.co/300x300?text=Coffee', alt: 'Steaming cup of coffee with latte art' },
-                { id: 7, url: 'https://placehold.co/300x300?text=City', alt: 'Skyline of a modern city at sunset' },
-                { id: 8, url: 'https://placehold.co/300x300?text=Beach', alt: 'Tropical beach with palm trees and turquoise water' },
-                { id: 9, url: 'https://placehold.co/300x300?text=Clock', alt: 'Vintage wall clock showing 3 o\'clock' }
+                { id: 1, url: 'https://picsum.photos/id/10/300/300', alt: 'A large oak tree in a green field' },
+                { id: 2, url: 'https://picsum.photos/id/20/300/300', alt: 'Orange tabby cat sitting on a windowsill' },
+                { id: 3, url: 'https://picsum.photos/id/30/300/300', alt: 'Snow-capped mountain peak under blue sky' },
+                { id: 4, url: 'https://picsum.photos/id/40/300/300', alt: 'Stack of colorful books on a wooden table' },
+                { id: 5, url: 'https://picsum.photos/id/50/300/300', alt: 'Red vintage bicycle leaning against a brick wall' },
+                { id: 6, url: 'https://picsum.photos/id/60/300/300', alt: 'Steaming cup of coffee with latte art' },
+                { id: 7, url: 'https://picsum.photos/id/70/300/300', alt: 'Skyline of a modern city at sunset' },
+                { id: 8, url: 'https://picsum.photos/id/80/300/300', alt: 'Tropical beach with palm trees and turquoise water' },
+                { id: 9, url: 'https://picsum.photos/id/90/300/300', alt: 'Vintage wall clock showing 3 o\'clock' }
             ];
             
             // Initialize the UI
@@ -582,6 +623,7 @@
                     loginSelectedImages = [];
                     updateSequenceIndicator(loginSequenceDots, 0);
                     loginMessage.classList.add('hidden');
+                    loginMessage.textContent = ''; // Clear message text
                     
                     // Clear selected state from all images
                     loginGrid.querySelectorAll('.selected').forEach(item => {
@@ -669,12 +711,12 @@
             }
             
             // Error handling for images
-            document.querySelectorAll('img').forEach(img => {
+            /* document.querySelectorAll('img').forEach(img => {
                 img.addEventListener('error', function() {
                     this.src = 'https://placehold.co/300x300?text=Image+Error';
                     this.alt = 'Failed to load image';
                 });
-            });
+            }); */
         });
     </script>
 </body>
